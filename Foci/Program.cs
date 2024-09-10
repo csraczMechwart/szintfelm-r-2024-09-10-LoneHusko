@@ -29,5 +29,19 @@ class Program {
         Console.WriteLine("\nCsapat neve:");
         var csapatNeve = Console.ReadLine();
         
+        var csapatStat = meccsek
+            .SelectMany(meccs => new[] {
+                new { Csapat = meccs.HazaiCsapatNeve, Adott = meccs.HazaiGol, Kapott = meccs.VendegGol },
+                new { Csapat = meccs.VendegCsapatNeve, Adott = meccs.VendegGol, Kapott = meccs.HazaiGol }
+            })
+            .Where(eredmeny => eredmeny.Csapat == csapatNeve)
+            .GroupBy(eredmeny => eredmeny.Csapat)
+            .Select(group => new {
+                OsszesAdott = group.Sum(x => x.Adott),
+                OsszesKapott = group.Sum(x => x.Kapott)
+            })
+            .FirstOrDefault();
+        Console.WriteLine(csapatStat != null?$"lőtt: {csapatStat.OsszesAdott} kapott: {csapatStat.OsszesKapott}":"Nincs találat");
+        
     }
 }
