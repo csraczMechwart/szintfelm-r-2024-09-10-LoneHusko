@@ -25,5 +25,9 @@ class Program {
         foreach (var result in forditottEredmenyek) {
             Console.WriteLine($"{result.forduloSzama}.: {result.nyertesCsapat}");
         }
+        
+        Console.WriteLine("\nCsapat neve:");
+        var csapatNeve = Console.ReadLine();
+        
     }
 }
