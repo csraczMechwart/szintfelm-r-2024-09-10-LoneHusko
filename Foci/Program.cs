@@ -51,7 +51,7 @@ class Program {
                 forduloSzama = meccs.ForduloSzama,
                 nyertes = meccs.VendegCsapatNeve,
             })
-            .First();
+            .FirstOrDefault();
 
         Console.WriteLine(elsoVesztettMeccs != null?$"Első elvesztett meccs hazaiként: {elsoVesztettMeccs.forduloSzama}, nyertes csapat: {elsoVesztettMeccs.nyertes}":"A csapat otthon veretlen maradt");
         
