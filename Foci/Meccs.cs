@@ -1,12 +1,12 @@
 ﻿namespace Foci;
 
 public class Meccs {
-    public Meccs(int forduloSzama, int hazaiGol, int vendegGol, int elsoFelidoGolok, int masodikFelidoGolok, string hazaiCsapatNeve, string vendegCsapatNeve) {
+    public Meccs(int forduloSzama, int hazaiGol, int vendegGol, int elsoFelidoHazaiGolok, int elsoFelidoVendegGolok, string hazaiCsapatNeve, string vendegCsapatNeve) {
         ForduloSzama = forduloSzama;
         HazaiGol = hazaiGol;
         VendegGol = vendegGol;
-        ElsoFelidoGolok = elsoFelidoGolok;
-        MasodikFelidoGolok = masodikFelidoGolok;
+        ElsoFelidoHazaiGolok = elsoFelidoHazaiGolok;
+        ElsoFelidoVendegGolok = elsoFelidoVendegGolok;
         HazaiCsapatNeve = hazaiCsapatNeve;
         VendegCsapatNeve = vendegCsapatNeve;
     }
@@ -14,8 +14,8 @@ public class Meccs {
     public int ForduloSzama { get; set; }
     public int HazaiGol { get; set; }
     public int VendegGol { get; set; }
-    public int ElsoFelidoGolok { get; set; }
-    public int MasodikFelidoGolok { get; set; }
+    public int ElsoFelidoHazaiGolok { get; set; }
+    public int ElsoFelidoVendegGolok { get; set; }
     public string HazaiCsapatNeve { get; set; }
     public string VendegCsapatNeve { get; set; }
 }
