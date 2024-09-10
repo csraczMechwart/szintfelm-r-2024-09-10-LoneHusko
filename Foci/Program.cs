@@ -43,5 +43,17 @@ class Program {
             .FirstOrDefault();
         Console.WriteLine(csapatStat != null?$"lőtt: {csapatStat.OsszesAdott} kapott: {csapatStat.OsszesKapott}":"Nincs találat");
         
+        var elsoVesztettMeccs = meccsek
+            .Where(meccs => meccs.HazaiCsapatNeve == csapatNeve && meccs.HazaiGol < meccs.VendegGol)
+            .OrderBy(meccs => meccs.ForduloSzama)
+            .Select(meccs => new 
+            { 
+                forduloSzama = meccs.ForduloSzama,
+                nyertes = meccs.VendegCsapatNeve,
+            })
+            .First();
+
+        Console.WriteLine(elsoVesztettMeccs != null?$"Első elvesztett meccs hazaiként: {elsoVesztettMeccs.forduloSzama}, nyertes csapat: {elsoVesztettMeccs.nyertes}":"A csapat otthon veretlen maradt");
+        
     }
 }
