@@ -15,8 +15,7 @@ class Program {
                 || 
                 (meccs.ElsoFelidoVendegGolok < meccs.ElsoFelidoHazaiGolok && meccs.VendegGol > meccs.HazaiGol)
             )
-            .Select(meccs => new 
-            { 
+            .Select(meccs => new { 
                 forduloSzama = meccs.ForduloSzama, 
                 nyertesCsapat = meccs.HazaiGol > meccs.VendegGol ? meccs.HazaiCsapatNeve : meccs.VendegCsapatNeve 
             })
@@ -46,8 +45,7 @@ class Program {
         var elsoVesztettMeccs = meccsek
             .Where(meccs => meccs.HazaiCsapatNeve == csapatNeve && meccs.HazaiGol < meccs.VendegGol)
             .OrderBy(meccs => meccs.ForduloSzama)
-            .Select(meccs => new 
-            { 
+            .Select(meccs => new { 
                 forduloSzama = meccs.ForduloSzama,
                 nyertes = meccs.VendegCsapatNeve,
             })
@@ -55,5 +53,25 @@ class Program {
 
         Console.WriteLine(elsoVesztettMeccs != null?$"Első elvesztett meccs hazaiként: {elsoVesztettMeccs.forduloSzama}, nyertes csapat: {elsoVesztettMeccs.nyertes}":"A csapat otthon veretlen maradt");
         
+        
+        var statisztika = meccsek
+            .Select(meccs => new {
+                vegeredmeny = meccs.HazaiGol > meccs.VendegGol
+                    ? $"{meccs.HazaiGol}-{meccs.VendegGol}"
+                    : $"{meccs.VendegGol}-{meccs.HazaiGol}"
+            })
+            .GroupBy(result => result.vegeredmeny)
+            .Select(csoport => new {
+                vegeredmeny = csoport.Key,
+                darab = csoport.Count()
+            })
+            // .OrderByDescending(stat => stat.darab)
+            .ToList();
+        
+        using (StreamWriter writer = new StreamWriter("stat.txt")) {
+            foreach (var stat in statisztika) {
+                writer.WriteLine($"{stat.vegeredmeny}: {stat.darab} darab");
+            }
+        }
     }
 }
